@@ -76,13 +76,13 @@ const Searchpage = () => {
 
         // Tentukan URL dan parameter berdasarkan mode pencarian
         if (isNearby) { // Prioritaskan nearby jika aktif
-            url = 'http://localhost:5000/beach/nearby';
+            url = 'https://recommendation-beach-backend-production.up.railway.app/beach/nearby';
             params = { lat: locationData.lat, lng: locationData.lng, radius: 50, limit: itemsPerPage, page: page };
             setSearchQuery('nearby'); // Update query untuk URL
             setIsNearbySearch(true); // Pastikan state ini aktif
             setSearchMode('search'); // Nearby adalah bagian dari mode 'search'
         } else if (mode === 'search') {
-            url = 'http://localhost:5000/beach/search';
+            url = 'https://recommendation-beach-backend-production.up.railway.app/beach/search';
             params = { search: query, limit: itemsPerPage, page: page };
             setIsNearbySearch(false); // Pastikan state ini nonaktif
         } else if (mode === 'recommend') {
@@ -92,7 +92,7 @@ const Searchpage = () => {
                 setResults([]);
                 return;
             }
-            url = 'http://localhost:5000/beach/recommend';
+            url = 'https://recommendation-beach-backend-production.up.railway.app/beach/recommend';
             // Perhatian: Di sini backend Anda kemungkinan besar butuh `query` sebagai `preference_text`
             // Periksa lagi error 400 sebelumnya. Jika masih muncul, coba ubah nama parameter `preference_text`
             // sesuai yang diharapkan backend (misal: 'text', 'query', 'preferenceText')
@@ -120,7 +120,7 @@ const Searchpage = () => {
                     const detailedRecommendations = await Promise.all(
                         recommendedPlaceIds.map(async (rec) => {
                             try {
-                                const detailResponse = await axios.get(`http://localhost:5000/beach/${rec.placeId}`, {
+                                const detailResponse = await axios.get(`https://recommendation-beach-backend-production.up.railway.app/beach/${rec.placeId}`, {
                                     headers: { Authorization: `Bearer ${currentToken}` }
                                 });
                                 return { ...detailResponse.data, score: rec.score }; // Pertahankan score

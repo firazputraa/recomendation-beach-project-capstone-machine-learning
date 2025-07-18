@@ -65,7 +65,7 @@ const Homepage = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/beach/recommend', {
+      const response = await axios.post('https://recommendation-beach-backend-production.up.railway.app/beach/recommend', {
         preference_text: preference,
         top_n: 8
       }, {
@@ -81,7 +81,7 @@ const Homepage = () => {
         const detailedRecommendations = await Promise.all(
           recommendedPlaceIds.map(async (rec) => {
             try {
-              const detailResponse = await axios.get(`http://localhost:5000/beach/${rec.placeId}`, {
+              const detailResponse = await axios.get(`https://recommendation-beach-backend-production.up.railway.app/beach/${rec.placeId}`, {
                 headers: {
                   Authorization: `Bearer ${token}`
                 }
@@ -150,7 +150,7 @@ const Homepage = () => {
 
     try {
       if (searchMode === 'search') {
-        const url = 'http://localhost:5000/beach/search';
+        const url = 'https://recommendation-beach-backend-production.up.railway.app/beach/search';
         const response = await axios.get(url, {
           params: {
             search: trimmed,
@@ -177,7 +177,7 @@ const Homepage = () => {
           return;
         }
 
-        const response = await axios.post('http://localhost:5000/beach/recommend', {
+        const response = await axios.post('https://recommendation-beach-backend-production.up.railway.app/beach/recommend', {
           preference_text: trimmed,
           top_n: 10
         }, {
@@ -192,7 +192,7 @@ const Homepage = () => {
           const detailedRecommendations = await Promise.all(
             recommendedPlaceIds.map(async (rec) => {
               try {
-                const detailResponse = await axios.get(`http://localhost:5000/beach/${rec.placeId}`, {
+                const detailResponse = await axios.get(`https://recommendation-beach-backend-production.up.railway.app/beach/${rec.placeId}`, {
                   headers: {
                     Authorization: `Bearer ${token}`
                   }
@@ -260,7 +260,7 @@ const Homepage = () => {
         async (position) => {
           const { latitude, longitude } = position.coords;
           try {
-            const response = await axios.get('http://localhost:5000/beach/nearby', {
+            const response = await axios.get('https://recommendation-beach-backend-production.up.railway.app/beach/nearby', {
               params: { lat: latitude, lng: longitude, radius: 50, limit: 20, page: 1 },
             });
             const nearbyResults = response.data.data;

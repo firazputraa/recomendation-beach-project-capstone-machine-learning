@@ -21,7 +21,7 @@ export default function ProfilePage() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await fetch('http://localhost:5000/user/me', {
+        const res = await fetch('https://recommendation-beach-backend-production.up.railway.app/user/me', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -75,7 +75,7 @@ export default function ProfilePage() {
 
       // Update username
       if (usernameChanged) {
-        const res = await fetch('http://localhost:5000/user/update-username', {
+        const res = await fetch('https://recommendation-beach-backend-production.up.railway.app/user/update-username', {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -96,7 +96,7 @@ export default function ProfilePage() {
 
       // Update password
       if (wantToChangePassword) {
-        const res = await fetch('http://localhost:5000/user/update-password', {
+        const res = await fetch('https://recommendation-beach-backend-production.up.railway.app/user/update-password', {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',

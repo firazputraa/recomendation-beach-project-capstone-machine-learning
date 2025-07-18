@@ -40,7 +40,7 @@ const SignupForm = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:5000/user/register", {
+      const response = await axios.post("https://recommendation-beach-backend-production.up.railway.app/user/register", {
         username,
         email,
         password,

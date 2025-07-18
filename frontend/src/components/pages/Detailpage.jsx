@@ -82,7 +82,7 @@ const DetailPage = () => {
         review_text: newFeedback.comment.trim(),
       };
 
-      const res = await fetch('http://localhost:5000/review/', { // Ensure this URL matches your Node.js backend
+      const res = await fetch('https://recommendation-beach-backend-production.up.railway.app/review/', { // Ensure this URL matches your Node.js backend
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -126,7 +126,7 @@ const DetailPage = () => {
   const handleDeleteConfirm = useCallback(async () => {
     if (!selectedReview) return;
     try {
-      const res = await fetch(`http://localhost:5000/review/${selectedReview.id}`, { // Ensure this URL matches your Node.js backend
+      const res = await fetch(`https://recommendation-beach-backend-production.up.railway.app/review/${selectedReview.id}`, { // Ensure this URL matches your Node.js backend
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -161,7 +161,7 @@ const DetailPage = () => {
         rating: updatedRating,
       };
 
-      const res = await fetch(`http://localhost:5000/review/${reviewId}`, { // Ensure this URL matches your Node.js backend
+      const res = await fetch(`https://recommendation-beach-backend-production.up.railway.app/review/${reviewId}`, { // Ensure this URL matches your Node.js backend
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -232,7 +232,7 @@ const DetailPage = () => {
       }
       try {
         setLoading(true);
-        const res = await fetch(`http://localhost:5000/beach/${placeId}`); // Adjust URL if needed
+        const res = await fetch(`https://recommendation-beach-backend-production.up.railway.app/beach/${placeId}`); // Adjust URL if needed
         if (!res.ok) {
           const err = await res.json().catch(() => ({ message: 'Unknown error' }));
           throw new Error(res.status === 404 ? 'Beach not found.' : err.message || 'Failed to fetch place details.');
@@ -253,7 +253,7 @@ const DetailPage = () => {
     const fetchReviews = async () => {
       if (!placeId) return;
       try {
-        const res = await fetch(`http://localhost:5000/review/${placeId}`); // Ensure this URL matches your Node.js backend
+        const res = await fetch(`https://recommendation-beach-backend-production.up.railway.app/review/${placeId}`); // Ensure this URL matches your Node.js backend
         if (res.ok) {
           const data = await res.json();
           setFeedbacks(data.reviews.map(r => ({
@@ -282,7 +282,7 @@ const DetailPage = () => {
       if (!place?.coordinates) return;
       const [lat, lng] = parseCoordinates(place.coordinates);
       try {
-        const res = await fetch(`http://localhost:5000/beach/nearby?lat=${lat}&lng=${lng}&radius=50&limit=10`); // Adjust URL if needed
+        const res = await fetch(`https://recommendation-beach-backend-production.up.railway.app/beach/nearby?lat=${lat}&lng=${lng}&radius=50&limit=10`); // Adjust URL if needed
         if (res.ok) {
           const json = await res.json();
           setRecommendedPlaces(json.data.filter(p => p.place_Id !== placeId));
